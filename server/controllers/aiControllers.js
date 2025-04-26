@@ -1,6 +1,6 @@
 const prompts = require('../utils/prompts');
 const { generateContentFromPrompt } = require('../utils/googleGeminiApi'); // Importing the new function
-const saveConversation = require('../utils/saveConvertation');
+const { saveConversation } = require('./conversationControllers');
 
 const processAIRequest = async (req, res) => {
   try {
@@ -10,27 +10,33 @@ const processAIRequest = async (req, res) => {
       return res.status(400).json({ error: "Missing required inputs." });
     }
 
-    let prompt = prompts[featureType];
 
-    if (!prompt) {
+    const promptTemplate = prompts[featureType];
+
+    if (!promptTemplate) {
       return res.status(400).json({ error: "Invalid feature selected." });
     }
 
-    let fullPrompt = prompt;
-    if (featureType === "convertCode" && language) {
-      fullPrompt += `Convert following code into ${language} language , Code : `;
+    let fullPrompt = promptTemplate;
+
+    if (featureType === "convertCode" && language?.trim()) {
+      fullPrompt += `Convert following code into ${language} language. Code: `;
     }
     fullPrompt += userInput;
 
-    const response = await generateContentFromPrompt(fullPrompt);  
-    
-    console.log("response " , response.response.text())
-   saveConversation(req.user.id, featureType, userInput, response);
+    const response = await generateContentFromPrompt(fullPrompt);
 
-    res.status(200).json(response);
+    if (req.user || req.user.id) {
+      await saveConversation(req.user.id, featureType, userInput, response);
+    }
+    
+    res.status(200).json({ success: true, data: response });
+
   }
   catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("AI Error:", error);
+    res.status(500).json({ error: "Internal Server Error. AI failed." });
+
   }
 };
 

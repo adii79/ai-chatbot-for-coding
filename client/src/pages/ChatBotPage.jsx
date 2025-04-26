@@ -1,11 +1,9 @@
-import Navbar from "../components/NavBar";
-import Slidebar from "../components/SlideBar";
+import Navbar from "../components/NavBar"; 
 
 function ChatBotPage() {
     return (
         <div>     
- <Navbar></Navbar>
-<Slidebar></Slidebar>
+ <Navbar></Navbar> 
         </div>
     )
 }

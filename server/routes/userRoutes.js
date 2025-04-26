@@ -1,11 +1,13 @@
 
- 
 const express = require('express');
 const router = express.Router();
-const { accessUserInfo } = require('../controllers/userControllers');
+const {   returnUserProfileInfo, returnUserConversations } = require('../controllers/userControllers');
  
 const authMiddleware = require('../middleware/authMiddleware')
 
-router.get('/info',  authMiddleware,accessUserInfo);
+router.get('/profile',  authMiddleware,returnUserProfileInfo);
+router.get('/conversations',  authMiddleware,returnUserConversations);
+
+
 
 module.exports = router;

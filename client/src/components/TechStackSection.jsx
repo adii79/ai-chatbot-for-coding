@@ -21,7 +21,7 @@ const techStack = [
     },
     {
         name: 'Gemini API',
-        logo: 'https://avatars.githubusercontent.com/u/18060234?s=280&v=4', // Updated!
+        logo: 'https://avatars.githubusercontent.com/u/18060234?s=280&v=4',
     },
     {
         name: 'HTML',
@@ -33,25 +33,26 @@ const techStack = [
     },
 ];
 
-
 export default function TechStackSection() {
     return (
         <div className="mt-24 max-w-6xl mx-auto px-6">
-            <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-900 dark:text-white mb-10">
                 Built with Modern & Powerful Technologies
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 items-center justify-center">
                 {techStack.map((tech, index) => (
                     <div
                         key={index}
-                        className="flex flex-col items-center justify-center hover:scale-105 transition-transform duration-300"
+                        className="flex flex-col items-center justify-center hover:scale-105 transition-transform duration-300 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md border border-gray-200 dark:border-gray-700"
                     >
                         <img
                             src={tech.logo}
                             alt={tech.name}
-                            className="h-14 w-14 object-contain mb-2"
+                            className="h-12 w-12 object-contain mb-3 "
                         />
-                        <span className="text-sm font-medium text-gray-700">{tech.name}</span>
+                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                            {tech.name}
+                        </span>
                     </div>
                 ))}
             </div>

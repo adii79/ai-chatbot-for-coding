@@ -4,12 +4,11 @@ require('dotenv').config();
 
 const returnUserProfileInfo = async (req, res) => {
     try {
-        const { email } = req.body;
-
-        const existingUser = await User.findOne({ email });
-
+        const userId = req.user.id;
+        const existingUser = await User.findById(userId).lean();
+        
         if (!existingUser) {
-            return res.status(409).json({ error: "Email does not exist" });
+            return res.status(404).json({ error: "Email does not exist" });
         }
 
         res.status(200).json({
@@ -21,18 +20,17 @@ const returnUserProfileInfo = async (req, res) => {
     }
 };
 
-const returnUserConvertations = async (req, res) => {
+const returnUserConversations = async (req, res) => {
     try {
-        const { email } = req.body;
-
-        const existingUser = await User.findOne({ email });
-
+        const userId = req.user.id;
+        const existingUser = await User.findById(userId);
+    
         if (!existingUser) {
             return res.status(409).json({ error: "Email does not exist" });
         }
 
-        const allConversations = await Convertation.find({ userId: existingUser._id }).sort({ createdAt: -1 });
-
+        const allConversations = await Convertation.find({ userId }).sort({ createdAt: -1 }).lean();
+      
         res.status(200).json({
             conversations: allConversations,
         });
@@ -43,5 +41,5 @@ const returnUserConvertations = async (req, res) => {
 
 module.exports = {
     returnUserProfileInfo,
-    returnUserConvertations,
+    returnUserConversations,
 };

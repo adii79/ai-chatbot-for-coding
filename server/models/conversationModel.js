@@ -25,5 +25,7 @@ const conversationSchema = new mongoose.Schema({
   }
 });
 
+conversationSchema.index({ userInput: 'text', aiOutput: 'text' });
+
 module.exports = mongoose.model("Conversation", conversationSchema);
 

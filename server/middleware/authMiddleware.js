@@ -3,26 +3,30 @@ require("dotenv").config()
 
 const authMiddleware = (req,res,next) =>{
     
-    const authHeader = req.header('Authorization');
+    // const authHeader = req.header('Authorization');
     
-    if(!authHeader ||  !authHeader.startsWith("Bearer")){
-        throw new Error("Empty token")
-    }
+    // if(!authHeader ||  !authHeader.startsWith("Bearer")){
+    //     throw new Error("Empty token")
+    // }
+    // const token = authHeader.split(" ")[1];
     
-    const token = authHeader.split(" ")[1];
- 
+    const token = req.cookies.token;
+    if (!token) {
+        return res.status(401).json({ message: "Authentication required" });
+      }
     try{
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
       
         req.user = decoded; 
-
        
+        next();
     }
     catch(error){
-        res.status(400).json({message : "Invalid Token"})
+       return res.status(400).json({message : "Invalid Token"})
     } 
-    next();
 };
 
-module.exports = authMiddleware;
+module.exports = authMiddleware;  
  
+ 
+
