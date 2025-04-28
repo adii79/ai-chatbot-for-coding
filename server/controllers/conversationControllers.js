@@ -5,7 +5,7 @@ const getAllConversations = async (req, res) => {
     try {
         const { featureType } = req.body;
         const userId = req.user.id;
-        
+
         const query = { userId };
 
         if (featureType) {
@@ -41,7 +41,7 @@ const getConversationById = async (req, res) => {
 };
 
 
-const saveConversation = async (userId, featureType, userInput, aiResponse) => {
+const saveConversation = async (res, userId, featureType, userInput, aiResponse) => {
     try {
 
         if (!featureType || !userInput || !aiResponse) {
@@ -52,7 +52,7 @@ const saveConversation = async (userId, featureType, userInput, aiResponse) => {
             userId,
             featureType,
             userInput,
-            aiOutput: aiResponse,
+            aiOutput: JSON.stringify(aiResponse),
             timestamp: new Date()
         });
 

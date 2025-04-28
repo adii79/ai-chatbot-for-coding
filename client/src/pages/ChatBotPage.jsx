@@ -1,9 +1,10 @@
-import Navbar from "../components/NavBar"; 
-
+import Navbar from "../components/NavBar";
+import SelectedFeature from "../components/SelectedFeature"
 function ChatBotPage() {
     return (
-        <div>     
- <Navbar></Navbar> 
+        <div>
+            <Navbar selected="Debug"></Navbar>
+            <SelectedFeature featureName="Debug"></SelectedFeature>
         </div>
     )
 }

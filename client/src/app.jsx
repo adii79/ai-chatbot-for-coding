@@ -11,6 +11,7 @@ import GeneratePage from './pages/GeneratePage'
 import ExplainPage from './pages/ExplainPage'
 import ConvertPage from './pages/ConvertPage'
 import TestCasesPage from './pages/TestCasesPage'
+import HistoryModal from './components/HistoryModal'
 
 export default function App() {
   return (
@@ -29,7 +30,7 @@ export default function App() {
       <Route path="/testcases" element={<TestCasesPage />} />
 
       {/* Optional: Redirect unknown routes */}
-      <Route path="*" element={<Navigate to="/" />} />
+      <Route path="/historyModal" element={<HistoryModal/>} />
     </Routes>
   )
 }

@@ -1,22 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const authMiddleware = require('../middlewares/authMiddleware');
+const authMiddleware = require('../middleware/authMiddleware');
 const {
     getAllConversations,
     getConversationById,
     deleteConversationById,
     clearAllConversations
-} = require('../controllers/conversationController');
+} = require('../controllers/conversationControllers');
 
-router.get('/conversations', authMiddleware, getAllConversations);
+router.get('/', authMiddleware, getAllConversations);
 
-router.get('/conversations/:id', authMiddleware, getConversationById);
+router.get('/:id', authMiddleware, getConversationById);
 
-router.delete('/conversations/:id', authMiddleware, deleteConversationById);
+router.delete('/:id', authMiddleware, deleteConversationById);
 
-router.delete('/conversations', authMiddleware, clearAllConversations);
+router.delete('/', authMiddleware, clearAllConversations);
 
 // router.get('/conversations/search', authMiddleware, searchConversations);
-
 
 module.exports = router;

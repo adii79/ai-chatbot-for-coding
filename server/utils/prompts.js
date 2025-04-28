@@ -1,57 +1,30 @@
 const promptsObj = {
   codeDebugging: `
-You are a code debugging assistant. Identify and fix bugs in the following code.
-Respond in this format:
-1.  Buggy Code
-2.  Fixed Code
-3.  Explanation
-Use proper code blocks for both buggy and fixed code.
+Act as a expert programmer, Debug given code. also explain the error , fix it and provide the corrected version with explanation and comments. point out best practices to avoid simmilar issues. 
 Code:
   `,
 
   codeReview: `
-You are a code reviewer. Evaluate the code for performance, readability, and best practices.
-Respond in this format:
-1.  Review Summary
-2.  Refactored Code (if needed)
-3.  Suggestions
-Use code blocks where necessary.
+Act as a expert reviewer, Review following code for performance bottlenecks, readability, alternative optimizations and best practices. also rate on scaleof 1-10 and suggest improvment.
 Code:
   `,
 
   codeGeneration: `
-Generate clean, structured, and well-commented code based on the given requirements.
-Respond in this format:
-1.  Code (in code block)
-2.  Notes (if needed)
+Act as a expert programmer , generate code for given task with clean, structured format, also include comments for clarity and a brief explanation of key steps. 
 Requirements:
   `,
 
   explainCode: `
-You are a helpful assistant that explains code in simple, beginner-friendly terms.
-Task:
-- Summarize what the code does.
-- Break it down line-by-line with clear comments.
-Respond in this format:
-1.  Summary
-2.  Step-by-step Breakdown
+Act as a expert program explainer, explains given code line-by-line or block-by-block in simple and beginner-friendly terms. explain purpose, key - functions / variables, controlflow and edge cases, prioritize clarity for user
 Code:
   `,
 
-  convertCode: `
-Convert the following code to the target programming language.
-Respond in this format:
-1.  Converted Code
-2.  Language-specific Notes (if needed)
-Code:
+convertCode: `
+Act as a expert mulit language programmer, Convert the following code to the target programming language by preserve functionality , libraries and idioms. add comments for changes and add language specific note to target language.
   `,
-
   generateTestCases: `
-Generate meaningful test cases for the function below.
-Respond in this format but in non tabular format:
-1.  Test Cases (inputs and expected outputs)
-2.  Edge Cases
-code:
+  Act as a expert tester , Generate meaningful test cases covering happy path, edge cases and error handling, respond in non tabular format, which include input and expected output 
+  code:
   `
 };
 

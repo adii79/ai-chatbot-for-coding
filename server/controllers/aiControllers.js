@@ -10,7 +10,6 @@ const processAIRequest = async (req, res) => {
       return res.status(400).json({ error: "Missing required inputs." });
     }
 
-
     const promptTemplate = prompts[featureType];
 
     if (!promptTemplate) {
@@ -20,16 +19,16 @@ const processAIRequest = async (req, res) => {
     let fullPrompt = promptTemplate;
 
     if (featureType === "convertCode" && language?.trim()) {
-      fullPrompt += `Convert following code into ${language} language. Code: `;
+      fullPrompt += `Targeted Language : ${language}. Code: `;
     }
     fullPrompt += userInput;
 
     const response = await generateContentFromPrompt(fullPrompt);
 
     if (req.user || req.user.id) {
-      await saveConversation(req.user.id, featureType, userInput, response);
+      await saveConversation( res, req.user.id, featureType, userInput, response);
     }
-    
+
     res.status(200).json({ success: true, data: response });
 
   }

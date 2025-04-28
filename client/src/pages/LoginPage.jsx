@@ -22,8 +22,8 @@ export default function LoginPage() {
       });
 
       if (response.status === 200) {
-        toast.success('Logged in successfully');
-        setTimeout(() => navigate('/ChatBotPage'), 1000);
+        toast.success('LoggedIn successful', { autoClose: 1000 });
+        setTimeout(() => navigate('/debug'), 2000);
       } else if (response.status === 404) {
         toast.info('User Not Found!');
       } else if (response.status === 401) {

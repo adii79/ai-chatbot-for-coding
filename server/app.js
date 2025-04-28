@@ -4,8 +4,10 @@ const dotenv = require('dotenv');
 const authRoutes = require('./routes/authRoutes')
 const aiRoutes = require("./routes/aiRoutes")
 const userRoutes = require("./routes/userRoutes")
+const conversationRoutes = require('./routes/conversationRoutes')
 const db = require('./config/db')
 const cookieParser = require('cookie-parser');
+
 dotenv.config();
 
 const app = express();
@@ -39,6 +41,7 @@ app.get('/', (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes)
 app.use('/api/ai', aiRoutes);
+app.use('/api/ai/convertations', conversationRoutes)
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
